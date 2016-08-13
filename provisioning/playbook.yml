@@ -1,0 +1,24 @@
+---
+- hosts: all
+  sudo: true
+  tasks:
+    - name: Update apt cache
+      apt: update_cache=yes
+
+    - name: Install the basics, pip, postgres
+      sudo: yes
+      apt: name={{ item }} state=latest
+      with_items:
+        - python-pip
+        - python-dev
+        - build-essential
+        - postgresql-9.4
+        - postgresql-9.4-postgis-2.1
+        - postgresql-server-dev-all
+        - python-psycopg2
+
+    - name: Install requirements
+      sudo: yes
+      pip: requirements=/home/vagrant/shared/requirements.txt
+    - shell: echo "cd ~/shared" >> /home/vagrant/.profile
+
