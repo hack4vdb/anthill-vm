@@ -5,7 +5,7 @@
     - name: Update apt cache
       apt: update_cache=yes
 
-    - name: Install the basics, pip, postgres
+    - name: Install the basics, pip, postgres, gem, gem-dev
       sudo: yes
       apt: name={{ item }} state=latest
       with_items:
@@ -16,9 +16,13 @@
         - postgresql-9.4-postgis-2.1
         - postgresql-server-dev-all
         - python-psycopg2
+        - libsqlite3-dev
 
     - name: Install requirements
       sudo: yes
       pip: requirements=/home/vagrant/shared/requirements.txt
+
     - shell: echo "cd ~/shared" >> /home/vagrant/.profile
+
+    - gem: name=mailcatcher version=0.5.12
 
