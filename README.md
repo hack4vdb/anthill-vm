@@ -1,2 +1,2 @@
 # anthill-vm
-Vagrant VM to run anthill-backend
+Vagrant VM to run anthill
